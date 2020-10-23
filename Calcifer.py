@@ -1,41 +1,39 @@
 import discord
+import os, os.path, dotenv, random, logging
 from discord.ext import commands
-import random
 
+dotenv.load_dotenv()
+TOKEN = os.getenv("DISCORD_TOKEN")
+cwd = os.getcwd()
+logging.basicConfig(filename='logs.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(name)s: %(message)s', datefmt='%d/%m/%y %I:%M:%S %p')
+
+# Bot stuff
 description = '''A python remake of Calcifer, my C# discord bot.'''
-
 intents = discord.Intents.default()
 intents.members = True
 
 bot = commands.Bot(command_prefix='~', description=description, intents=intents)
 
+# Grab all the Cogs
+for filename in os.listdir(f'{cwd}\\Cogs'):
+    if filename.endswith(".py"):
+        bot.load_extension(f"Cogs.{filename[:-3]}")
+
 @bot.event
 async def on_ready():
-    print('Logged in as ')
-    print(bot.user.name)
-    print(bot.user.id)
+    logging.info('Login Started')
+    print('Logged in as {bot.user.name} UID: {bot.user.id}.')
+    logging.info('Login Completed')
     print('--------')
+    await bot.change_presence(activity=discord.Game(name='Version 0.1, now running on Python!'))
 
-@bot.command()
-async def add(ctx, left: int, right: int):
-    """adds two numbers together."""
-    await ctx.send(left + right)
+# Listen for command errors
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        pass # Fail silently
 
-@bot.command()
-async def roll(ctx, dice: str):
-    """Rolls a dice in NdN format."""
-    try:
-        rolls, limit = map(int, dice.split('d'))
-    except Exception:
-        await ctx.send('Format has to be NdN!')
-        return
-        
-    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-    await ctx.send(result)
-
-@bot.command()
-async def joined(ctx, member: discord.Member):
-    """Says when a member joined."""
-    await ctx.send('{0.name} Joined in {0.joined_at}'.format(member))
-
-bot.run('token')
+    if isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send('You seem to be missing an argument for the command {ctx.command}. Please try again.')
+    
+bot.run(TOKEN)
