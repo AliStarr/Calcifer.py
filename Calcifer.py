@@ -26,15 +26,15 @@ async def roll(ctx, dice: str):
     """Rolls a dice in NdN format."""
     try:
         rolls, limit = map(int, dice.split('d'))
-        except Exception:
-            await ctx.send('Format has to be NdN!')
-            return
+    except Exception:
+        await ctx.send('Format has to be NdN!')
+        return
         
-        result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-        await ctx.send(result)
+    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    await ctx.send(result)
 
 @bot.command()
-async def joined(ctx, memberL discord.Member):
+async def joined(ctx, member: discord.Member):
     """Says when a member joined."""
     await ctx.send('{0.name} Joined in {0.joined_at}'.format(member))
 
