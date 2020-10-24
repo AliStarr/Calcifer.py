@@ -15,11 +15,23 @@ class Public(commands.Cog):
     async def on_message(self, message):
         if message.author == self.bot.user:
             return # Don't reply to our selves.
+    
+    @commands.command()
+    async def info(self, ctx):
+        """Displays bot information"""
+        app_info = await self.bot.application_info()
+        version = os.getenv("VERSION")
+        embed = discord.Embed(title=f'Calcifer Bot Information')
+        embed.add_field(name='**General**', value=f"Author: `{app_info.owner}`\nVersion: {version}")
+        embed.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
 
     @commands.command()
-    async def add(self, ctx, left: int, right: int):
-        """adds two numbers together."""
-        await ctx.send(left + right)
+    async def say(self, ctx, msg: str):
+        """Echos the input"""
+        if msg.startswith('~'):
+            await ctx.send('Nice try.') # dont allow commands to be run
+        await ctx.send('\u200b{msg}') # add a zero white space so we don't trigger bots.
 
     @commands.command()
     async def roll(self, ctx, dice: str):
