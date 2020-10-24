@@ -1,7 +1,7 @@
 import discord
-import logging, os, os.path, random
+import logging, os, os.path, random, platform, psutil, humanfriendly
 from discord.ext import commands
-from discord.utils import get
+
 
 class Public(commands.Cog):
     def __init__(self, bot):
@@ -21,8 +21,11 @@ class Public(commands.Cog):
         """Displays bot information"""
         app_info = await self.bot.application_info()
         version = os.getenv("VERSION")
+        pid = os.getpid()
+        memory_use = psutil.Process(pid).memory_info().rss
         embed = discord.Embed(title=f'Calcifer Bot Information')
-        embed.add_field(name='**General**', value=f"Author: `{app_info.owner}`\nVersion: {version}")
+        embed.add_field(name='**General**', value=f"Author: `{app_info.owner}`\nVersion: `{version}`")
+        embed.add_field(name='System Information', value=f"Python Version: `{platform.python_version()}`\nDiscord.py Version: `{discord.__version__}`\n Memory Usage: `{humanfriendly.format_size(memory_use)}`")
         embed.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed)
 
@@ -51,7 +54,7 @@ class Public(commands.Cog):
         await ctx.send('{0.name} Joined in {0.joined_at}'.format(member))
 
     @commands.command()
-    async def Ping(self, ctx):
+    async def ping(self, ctx):
         await ctx.send(f'Pong! ``{round(self.bot.latency * 1000)}ms``')
 
 def setup(bot):

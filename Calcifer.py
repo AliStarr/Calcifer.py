@@ -36,4 +36,14 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
         await ctx.send('You seem to be missing an argument for the command {ctx.command}. Please try again.')
     
+    if isinstance(error, commands.CommandInvokeError):
+        await ctx.send('Command Invoke Error. Something fucked up.')
+        logging.error('Command Invoke Error in command {ctx.command}!')
+    
+    if isinstance(error, commands.DisabledCommand):
+        await ctx.send('The {ctx.command} command has been disabled.')
+
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send('You dont have permission to run {ctx.command}!')
+    
 bot.run(TOKEN)
