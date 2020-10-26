@@ -1,0 +1,5 @@
+.vscode/launch.json
+vscode/*
+logs.log
+.env
+Cogs/__pycache__/*
