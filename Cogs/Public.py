@@ -37,18 +37,6 @@ class Public(commands.Cog):
         await ctx.send('\u200b{msg}') # add a zero white space so we don't trigger bots.
 
     @commands.command()
-    async def roll(self, ctx, dice: str):
-        """Rolls a dice in NdN format."""
-        try:
-            rolls, limit = map(int, dice.split('d'))
-        except Exception:
-            await ctx.send('Format has to be NdN!')
-            return
-            
-        result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-        await ctx.send(result)
-
-    @commands.command()
     async def joined(self, ctx, member: discord.Member):
         """Says when a member joined."""
         await ctx.send('{0.name} Joined at {0.joined_at}'.format(member))
@@ -60,7 +48,7 @@ class Public(commands.Cog):
 
     @commands.command()
     async def bug(self, ctx):
-        await ctx.send(f"Pinging Alister and to tell him he sucks at programming... <@181766490050002945>")
+        await ctx.send(f"Pinging Alister and to tell him he sucks at programming... <@181766490050002945>") # I'll figure out how to mention owner_id later
 
 
 def setup(bot):
