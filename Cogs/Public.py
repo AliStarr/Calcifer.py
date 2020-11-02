@@ -24,7 +24,7 @@ class Public(commands.Cog):
         pid = os.getpid()
         memory_use = psutil.Process(pid).memory_info().rss
         embed = discord.Embed(title=f'Calcifer Bot Information')
-        embed.add_field(name='**General**', value=f"Author: `{app_info.owner}`\nVersion: `{version}`\nGithub: `None yet`")
+        embed.add_field(name='**General**', value=f"Author: `{app_info.owner}`\nVersion: `{version}`\nGithub: `https://github.com/AliStarr/Calcifer.py`")
         embed.add_field(name='System Information', value=f"Python Version: `{platform.python_version()}`\nDiscord.py Version: `{discord.__version__}`\n Memory Usage: `{humanfriendly.format_size(memory_use)}`")
         embed.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed)
