@@ -15,7 +15,7 @@ intents.members = True
 bot = commands.Bot(command_prefix='~', description=description, intents=intents, case_insesnsitive=True)
 
 # Grab all the Cogs
-for filename in os.listdir(f'{cwd}\\Cogs'):
+for filename in os.listdir(f"{cwd}\\src\\Cogs"):
     if filename.endswith(".py"):
         bot.load_extension(f"Cogs.{filename[:-3]}")
 
