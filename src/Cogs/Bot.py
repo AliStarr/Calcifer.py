@@ -9,6 +9,7 @@ class Bot(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info("Bot Cog loaded")
+        print('Bot Cog loaded')
 
 
 def setup(bot):

@@ -9,6 +9,7 @@ class Public(commands.Cog):
     
     @commands.Cog.listener()
     async def on_ready(self):
+        print('Public Cog loaded')
         logging.info("Public Cog loaded")
 
     @commands.Cog.listener()
@@ -32,14 +33,14 @@ class Public(commands.Cog):
     @commands.command()
     async def say(self, ctx, msg: str):
         """Echos the input"""
-        if msg.startswith('~'):
+        if msg.startswith('/'):
             await ctx.send('Nice try.') # dont allow commands to be run
         await ctx.send('\u200b{msg}') # add a zero white space so we don't trigger bots.
 
     @commands.command()
     async def joined(self, ctx, member: discord.Member):
         """Says when a member joined."""
-        await ctx.send('{0.name} Joined at {0.joined_at}'.format(member))
+        await ctx.send(f'{member.name} Joined at {member.joined_at}')
 
     @commands.command()
     async def ping(self, ctx):

@@ -9,6 +9,7 @@ class Owner(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info('Owner Cog loaded')
+        print('Owner Cog loaded')
 
     @commands.command()
     @commands.is_owner()

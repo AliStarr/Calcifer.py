@@ -9,6 +9,7 @@ class Games(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info("Games Cog loaded")
+        print('Games Cog loaded')
     
     @commands.command()
     async def roll(self, ctx, dice: str):
@@ -16,7 +17,7 @@ class Games(commands.Cog):
         try:
             rolls, limit = map(int, dice.split('d'))
         except Exception:
-            await ctx.send('Format has to be NdN!')
+            await ctx.send('Format has to be NdN! E.g: 1d6 rolls a 6 sided die once.')
             return
             
         result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
@@ -30,6 +31,20 @@ class Games(commands.Cog):
             await ctx.send(f'Heads!')
         else:
             await ctx.send(f'Tails!')
+    
+    @commands.command()
+    async def eightball(self, ctx, msg: str):
+        '''Ask the magic 8ball a question'''
+        try:
+
+            answers = ["It is certain", "It is decidedly so", "Without a doubt", "Yes definitely", "You may rely on it", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes","Reply hazy try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again","Don't count on it", "My reply is no", "My sources say no", "Outlook not so good","Very doubtful"]
+            result = random.randint(1, len(answers))
+
+            await ctx.send(f'The magic 8ball replies: {answers[result]}')
+        except Exception:
+            await ctx.send(F'{Exception}')
+            raise
+
         
 
 def setup(bot):

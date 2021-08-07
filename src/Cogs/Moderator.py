@@ -9,6 +9,7 @@ class Moderator(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         logging.info("Moderator Cog loaded")
+        print('Moderator Cog loaded')
 
 
 def setup(bot):
