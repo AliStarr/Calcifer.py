@@ -5,7 +5,7 @@ from discord.ext import commands
 dotenv.load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 cwd = os.getcwd()
-logging.basicConfig(filename='logs.log', level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(name)s: %(message)s', datefmt='%d/%m/%y %I:%M:%S %p')
+logging.basicConfig(filename='logs.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(name)s: %(message)s', datefmt='%d/%m/%y %I:%M:%S %p')
 
 bot_version = os.getenv("VERSION")
 
