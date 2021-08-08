@@ -32,8 +32,8 @@ class Games(commands.Cog):
         else:
             await ctx.send(f'Tails!')
     
-    @commands.command()
-    async def eightball(self, ctx, msg: str):
+    @commands.command(name='8ball')
+    async def eight_ball(self, ctx, msg: str):
         '''Ask the magic 8ball a question'''
         try:
 
