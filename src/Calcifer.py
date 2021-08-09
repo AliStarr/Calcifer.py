@@ -7,7 +7,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 cwd = os.getcwd()
 logging.basicConfig(filename='logs.log', level=logging.INFO, format='%(asctime)s:%(levelname)s:%(name)s: %(message)s', datefmt='%d/%m/%y %I:%M:%S %p')
 
-bot_version = os.getenv("VERSION")
+BOT_VERSION = os.getenv("VERSION")
 
 # Bot stuff
 description = '''A python remake of Calcifer, my C# discord bot.'''
@@ -27,7 +27,7 @@ async def on_ready():
     print(f'Logged in as {bot.user.name}. UID: {bot.user.id}.')
     logging.info('Login Completed')
     print('--------')
-    await bot.change_presence(activity=discord.Game(name=f'Version {bot_version}'))
+    await bot.change_presence(activity=discord.Game(name=f'Version {BOT_VERSION}'))
 
 # Listen for command errors
 @bot.event
