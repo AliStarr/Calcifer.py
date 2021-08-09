@@ -33,17 +33,22 @@ class Games(commands.Cog):
             await ctx.send(f'Tails!')
     
     @commands.command(name='8ball')
-    async def eight_ball(self, ctx, msg: str):
+    async def eight_ball(self, ctx, *, msg):
         '''Ask the magic 8ball a question'''
+        
+        answers = ["It is certain", "It is decidedly so", "Without a doubt", "Yes definitely", "You may rely on it", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes","Reply hazy try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again","Don't count on it", "My reply is no", "My sources say no", "Outlook not so good","Very doubtful"]
+        result = random.randint(1, len(answers))
+
         try:
 
-            answers = ["It is certain", "It is decidedly so", "Without a doubt", "Yes definitely", "You may rely on it", "As I see it, yes", "Most likely", "Outlook good", "Yes", "Signs point to yes","Reply hazy try again", "Ask again later", "Better not tell you now", "Cannot predict now", "Concentrate and ask again","Don't count on it", "My reply is no", "My sources say no", "Outlook not so good","Very doubtful"]
-            result = random.randint(1, len(answers))
+            embed = discord.Embed(title=f"Magic 8 Ball")
+            embed.add_field(name='\u200b', value=f'**{ctx.author}** shakes the magic 8 ball and asks: {msg}') # ZWS to get around needing a name.
+            embed.add_field(name='\u200b', value=f'**The magic 8 ball responds**: {answers[result]}', inline=False)
 
-            await ctx.send(f'The magic 8ball replies: {answers[result]}')
-        except Exception:
-            await ctx.send(F'{Exception}')
-            raise
+            await ctx.send(embed=embed)
+        except Exception as err:
+            print(err)
+       
 
         
 
