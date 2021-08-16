@@ -1,8 +1,10 @@
-.vscode/launch.json
-vscode/*
+.vscode
+.vscode/*
 logs.log
 .env
 Cogs/__pycache__/*
+__pycache__
 .vs
 .git
 *.pyc
+dockerfile
