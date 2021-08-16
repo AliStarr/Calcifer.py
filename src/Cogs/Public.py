@@ -1,5 +1,5 @@
 import discord
-import logging, os, os.path, random, platform, psutil, humanfriendly
+import logging, os, os.path, platform, psutil, humanfriendly
 from discord.ext import commands
 
 
@@ -35,7 +35,8 @@ class Public(commands.Cog):
         """Echos the input"""
         if msg.startswith('/'):
             await ctx.send('Nice try.') # dont allow commands to be run
-        await ctx.send('\u200b{msg}') # add a zero white space so we don't trigger bots.
+        else:
+            await ctx.send(f'\u200b{msg}') # add a zero white space so we don't trigger bots.
 
     @commands.command()
     async def joined(self, ctx, member: discord.Member):
@@ -45,7 +46,7 @@ class Public(commands.Cog):
     @commands.command()
     async def ping(self, ctx):
         """Get round trip information"""
-        await ctx.send(f'Pong! ``{round(self.bot.latency * 1000)}ms``')
+        await ctx.send(f'Pong! ``{round(self.bot.latency * 1000)}ms`` Round trip')
 
     @commands.command()
     async def bug(self, ctx):
